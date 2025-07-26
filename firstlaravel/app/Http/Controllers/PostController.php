@@ -14,7 +14,7 @@ class PostController extends Controller
     {
         // on which page to return
         $posts = Post::all(); // Grabbing all the data in the database that is a post
-        return view('post.index', compact('posts')); // returning into this page
+        return view('posts.index', compact('posts')); // returning into this page
     }
 
     /**
@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        return view('posts.create');
     }
 
     /**
@@ -30,7 +30,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            // TO validate data in the required field
+        $validated = $request->validate([
+            'title' => 'required', // this targeted the required in the HTML
+            'body' => 'required', // this targeted the required in the HTML
+        ]);
+
+        Post::create($validated);
+        return redirect()->route('posts.index')->with('sucess', 'Post created successfully');
     }
 
     /**
@@ -44,9 +51,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(Post $id)
     {
-        //
+        $post = Post::findOrFail($id); // targets the ID of the user
+        return view('posts.edit', compact('posts'));
     }
 
     /**
