@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('post', PostController::class);
+Route::resource('posts', PostController::class);
