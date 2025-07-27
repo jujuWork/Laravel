@@ -37,7 +37,8 @@ class PostController extends Controller
         ]);
 
         Post::create($validated);
-        return redirect()->route('posts.index')->with('sucess', 'Post created successfully');
+        return redirect()->route('posts.index')
+            ->with('sucess', 'Post created successfully');
     }
 
     /**
@@ -51,25 +52,39 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $id)
+    public function edit($id)
     {
-        $post = Post::findOrFail($id); // targets the ID of the user
+        $post = Post::findOrFail($id); // targets the ID of the user to find the posts
         return view('posts.edit', compact('posts'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        // Validate the data
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $post = Post::findOrFail($id); // Find the Post
+        $post->update($validated);
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post update successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id); // Find the Post
+        $post->delete();                // Delete the Post
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post Delete Successfully');
     }
 }
