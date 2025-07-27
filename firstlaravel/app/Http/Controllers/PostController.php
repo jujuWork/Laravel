@@ -55,7 +55,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id); // targets the ID of the user to find the posts
-        return view('posts.edit', compact('posts'));
+        return view('posts.edit', compact('post'));
     }
 
     /**
