@@ -3,30 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Edit Post!</h1>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Edit Post</h1>
 
-    <form action="{{ route('posts.update', $post->id) }}" method="POST">
-        @csrf
-        @method('PUT') <!-- Tells laravel to treate this as a PUT request -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Form Start -->
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{ route('posts.update', $post->id ) }}" method="POST">
+                            @csrf
+                            @method('PUT') <!-- Simulate Put Method -->
 
-        <label for="title">Title:</label> <br>
-            <input type="text" name="title" id="title" value="{{ old('title', $post->title)}}">
-                    <br><br>
-        <label for="body">Body:</label> <br>
-            <textarea name="body" id="body">{{ old('body', $post->body) }}</textarea>
-                    <br><br>
-        <button type="submit">Update</button>
-    </form>
+                            <!-- Title Field -->
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title:</label>
+                                <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $post->title) }}">
+                            </div>
 
-        @if ($errors->any())
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+                            <!-- Body Field -->
+                            <div class="mb-3">
+                                <label for="body" class="form-label">Body:</label>
+                                <textarea name="body" id="body" class="form-control" rows="5">{{ old('body', $post->body) }}</textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-warning">🔁 Update</button>
+                            </div>
+                        </form>
+
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

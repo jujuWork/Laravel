@@ -32,7 +32,7 @@
                 
                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                     @csrf
-                    @method('DELETE')
+                    @method('DELETE') <!-- Simulate Delete Method -->
 
                         <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure to delete this post?')">
                             🗑️ Delete
@@ -41,9 +41,7 @@
                 </div>
             </div>
         </div>
-
         @endforeach
-
     </div>
 </body>
 </html>
