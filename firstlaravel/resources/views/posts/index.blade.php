@@ -18,7 +18,7 @@
             <form action="{{ route('posts.destroy', $post->id)}}" method="POSt"> <!-- Redirect and destroy if the ID is found -->
                 @csrf  <!-- Cross-sight required forgery -->
                 @method('DELETE') <!-- Spoofs a Delete request because of HTML -->
-                    <button type="submit" onclick="return confrim('Are you sure to Delete')">Delete</button>
+                    <button type="submit" onclick="return confirm('Are you sure to delete this post?')">Delete</button>
             </form>
         </div>
         @endforeach
