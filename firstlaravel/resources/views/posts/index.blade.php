@@ -25,6 +25,20 @@
             <div class="card-body">
                 <h4 class="card-title">{{ $post->title }}</h4>
                 <p class="card-text">{{ $post->body }}</p>
+
+                <div class="d-flex gap-2">
+                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-primary btn-sm"></a>
+                        ✏️ Edit
+                </div>
+
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure to delete this post?')">
+                    🗑️ Delete
+                </button>
+                </form>
             </div>
         </div>
 
