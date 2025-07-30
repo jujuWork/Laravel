@@ -6,7 +6,7 @@
     <title>Document</title>
 
     @viteReactRefresh
-    @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
 </head>
 <body>
     <div id="app">Hello</div>
